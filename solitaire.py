@@ -58,6 +58,7 @@ with EmissionsTracker() as tracker:
         numPlayPiles = 7
     
         def __init__(self):
+            print("This line works")
             self.list_of_cards = [Card(value, suit) for value in range(1, 14) for suit in ["Diamonds", "Hearts", "Clubs", "Spades"]]
             self.deck = Deck(self.list_of_values,self.suits)
             self.playPiles = []
@@ -195,6 +196,7 @@ with EmissionsTracker() as tracker:
         
                     
         def simulate(self, draw = False, verbose=False):
+            print("This line works")
         
             # clear cache if last turn was not card draw
             if not draw:
@@ -231,6 +233,7 @@ with EmissionsTracker() as tracker:
         # define the bogosort function
 
         def bogosort(self):
+            print("This line works")
             arr_values = [card.value for card in self.deck.cards]
             while not all(arr_values[i] <= arr_values[i + 1] for i in range(len(arr_values) - 1)):
                 random.shuffle(arr_values)
@@ -244,6 +247,7 @@ with EmissionsTracker() as tracker:
 
         thisGame = Game()
         thisGame.simulate(verbose=True)
+        print("This line works")
         print()
         pp.pprint(thisGame.getGameElements())
         print()
