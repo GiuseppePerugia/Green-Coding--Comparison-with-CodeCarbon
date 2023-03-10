@@ -3,6 +3,7 @@ from codecarbon import EmissionsTracker
 import pprint
 import random
 
+
 pp = pprint.PrettyPrinter(indent=4)
 
 
@@ -37,8 +38,10 @@ with EmissionsTracker() as tracker:
         colors = [color1, color2]
         signs = [sign1, sign2, sign3, sign4]
 
+        list_of_values = values
+
         print("The cards in your deck are:")
-        for i in values:
+        for i in list_of_values:
             for x in signs:
                 for y in colors:
                     print("Card: " + i + " Color: " + y + " Symbol: " + x)
@@ -56,7 +59,7 @@ with EmissionsTracker() as tracker:
     
         def __init__(self):
             self.list_of_cards = [Card(value, suit) for value in range(1, 14) for suit in ["Diamonds", "Hearts", "Clubs", "Spades"]]
-            self.deck = Deck(self.values,self.suits)
+            self.deck = Deck(self.list_of_values,self.suits)
             self.playPiles = []
             for i in range(self.numPlayPiles):
                 thisPile = Pile()
@@ -76,7 +79,7 @@ with EmissionsTracker() as tracker:
         
         def checkCardOrder(self,higherCard,lowerCard):
             suitsDifferent = self.suits[higherCard.suit] != self.suits[lowerCard.suit]
-            valueConsecutive = self.values[self.values.index(higherCard.value)-1] == lowerCard.value
+            valueConsecutive = self.list_of_values[self.list_of_values.index(higherCard.value)-1] == lowerCard.value
             return suitsDifferent and valueConsecutive
     
         def checkIfCompleted(self):
@@ -90,7 +93,7 @@ with EmissionsTracker() as tracker:
                 return False
             elif len(self.blockPiles[card.suit].cards)>0:
                 highest_value = self.blockPiles[card.suit].cards[0].value
-                if self.values[self.values.index(highest_value)+1] == card.value:
+                if self.list_of_values[self.list_of_values.index(highest_value)+1] == card.value:
                     self.blockPiles[card.suit].cards.insert(0,card)
                     return True
                 else:
@@ -114,6 +117,8 @@ with EmissionsTracker() as tracker:
                     if verbose:
                         print("Adding play pile card to block: {0}".format(str(card_added)))
                     return True
+                else:
+                    print("Pile has cards")
             
             #2: check if cards in deck can be added
             if self.addToBlock(self.deck.getFirstCard()):
@@ -139,6 +144,8 @@ with EmissionsTracker() as tracker:
                         if verbose:
                             print("Moving {0} from Deck to Empty Pile".format(str(card_added)))
                         return True
+                else:
+                    print("Pile has cards")
             
             #4: add drawn card to playPiles 
             for pile in self.playPiles:
@@ -149,6 +156,8 @@ with EmissionsTracker() as tracker:
                         if verbose:
                             print("Moving {0} from Deck to Pile".format(str(card_added)))
                         return True
+                else:
+                    print("Pile has cards")
                             
             #5: move around cards in playPiles
             for pile1 in self.playPiles:
@@ -180,6 +189,8 @@ with EmissionsTracker() as tracker:
                                                 ", ".join([str(card) for card in cards_to_transfer])
                                                                                              ))
                                         return True
+                else:
+                    print("Pile has cards")
             return False
         
                     
