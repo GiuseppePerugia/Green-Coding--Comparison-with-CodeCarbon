@@ -47,6 +47,7 @@ In code2 does not happens reducing the computational workload.
 In code1 we call same functions multiple times which requires power and energy to access them.
 We can simply call a function once, store it in a variable and use that variable when you need the function.
 We save energy and the code looks more tidy.
+Also in code1 we have a series of debuginning printing statement which do not add any value in production.
 
 ## Avoid unnecessary variables
 
